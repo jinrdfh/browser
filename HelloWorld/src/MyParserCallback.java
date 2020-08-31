@@ -7,9 +7,11 @@ import java.util.*;
 
 class MyParserCallback extends HTMLEditorKit.ParserCallback {
 	public String content = new String();
+	public String m_title = new String();
 	public List<String> urls = new ArrayList<String>();
 	public Map<String, Integer> wordsPos = new HashMap<String, Integer>(); 
 	int m_iMax = 10;
+	boolean bTitleFlag = false;
 
 	@Override
 	public void handleText(char[] data, int pos) {
@@ -19,6 +21,10 @@ class MyParserCallback extends HTMLEditorKit.ParserCallback {
 		{
 			/* new */
 			wordsPos.put(tpWord, pos);
+		}
+		if (bTitleFlag)
+		{
+			m_title = tpWord;
 		}
 	}
 	@Override
@@ -45,6 +51,15 @@ class MyParserCallback extends HTMLEditorKit.ParserCallback {
 						urls.add(words[0]);
 				}
 			}
+		}else if (tag.toString().equals("title")){
+			bTitleFlag = true;
+		}
+	}
+
+	public void handleEndTag(Tag tag, MutableAttributeSet attrSet, int pos) 
+	{
+		if (tag.toString().equals("title")){
+			bTitleFlag = false;
 		}
 	}
 }
