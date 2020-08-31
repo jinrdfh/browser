@@ -113,8 +113,16 @@ public class HelloWorld {
 	public HashMap<String, PageWords > m_pageInfo = new HashMap<String, PageWords >();
 	public List<String> urlPool = new ArrayList<String>();
 	public List<String> processedUrlPool = new ArrayList<String>();
+
+	/** modify */
 	public int urlPoolMax = 10;
-	public int processedUrlPoolMax = 3;
+	public int processedUrlPoolMax = 100;
+	public String sUrlFileName = "D:\\eclipseWorkSpace\\book.txt";
+	public String sKeyFileName = "D:\\eclipseWorkSpace\\key.txt";
+	public String sBlackUrlsFileName = "D:\\eclipseWorkSpace\\blacklistUrls.txt";
+	public String sBlackKeysFileName = "D:\\eclipseWorkSpace\\blacklistWords.txt";
+	public String sInitUrl = "http://www.comp.hkbu.edu.hk";
+	/** */
 
 	public List<String> blacklistUrls = new ArrayList<String>();
 	public List<String> blacklistWords = new ArrayList<String>();
@@ -527,10 +535,10 @@ public class HelloWorld {
 		String url = new String();
 		boolean endFlag = false;
 
-		oneWorld.readBlacklist("D:\\eclipseWorkSpace\\blacklistUrls.txt",
-			"D:\\eclipseWorkSpace\\blacklistWords.txt");
+		oneWorld.readBlacklist(oneWorld.sBlackUrlsFileName,
+			oneWorld.sBlackKeysFileName);
 
-		 oneWorld.urlPool.add("http://www.comp.hkbu.edu.hk");
+		 oneWorld.urlPool.add(oneWorld.sInitUrl);
 //		oneWorld.urlPool.add("http://localhost:8080/");
 
 		while (!oneWorld.urlPool.isEmpty())
@@ -553,8 +561,8 @@ public class HelloWorld {
             System.out.println(oneWorld.urlBook[i]);
         }*/
 		//System.out.println(oneWorld.findUrlIdByKey);
-		oneWorld.saveBook("D:\\eclipseWorkSpace\\book.txt");
-		oneWorld.saveKey("D:\\eclipseWorkSpace\\key.txt");
+		oneWorld.saveBook(oneWorld.sUrlFileName);
+		oneWorld.saveKey(oneWorld.sKeyFileName);
 	}
 
 }

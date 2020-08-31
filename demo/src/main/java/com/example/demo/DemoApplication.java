@@ -20,6 +20,11 @@ public class DemoApplication {
 	public boolean readDataFlag = false;
 	public HashMap<String, KeyInfo> m_keysRecord = new HashMap<String, KeyInfo>();
 
+	/** modify */
+	public String sUrlFileName = "D:\\eclipseWorkSpace\\book.txt";
+	public String sKeyFileName = "D:\\eclipseWorkSpace\\key.txt";
+	/** */
+
 	boolean readBook(String fileName) {
 		BufferedReader reader = null;
 		String tpState = "start";
@@ -435,8 +440,8 @@ public class DemoApplication {
     }
 	public static void main(String[] args) {
 		DemoApplication oneDemo = new DemoApplication();
-		oneDemo.readBook("D:\\eclipseWorkSpace\\book.txt");
-		oneDemo.readKey("D:\\eclipseWorkSpace\\key.txt");
+		oneDemo.readBook(oneDemo.sUrlFileName);
+		oneDemo.readKey(oneDemo.sKeyFileName);
         for (int i = 0; i < oneDemo.urlBook.length; i++) {
             System.out.println(oneDemo.urlBook[i]);
         }
@@ -461,8 +466,8 @@ public class DemoApplication {
 		String sScope) {
 		if (!readDataFlag)
 		{
-            readBook("D:\\eclipseWorkSpace\\book.txt");
-            readKey("D:\\eclipseWorkSpace\\key.txt");
+            readBook(sUrlFileName);
+            readKey(sKeyFileName);
 			System.out.println("init");
 		}
         System.out.println("DEBUG scope: " + sScope);
@@ -475,7 +480,7 @@ public class DemoApplication {
 			System.out.println("DEBUG phrase: " + sLowQuery);
 			String sPhrase = sLowQuery.split("\"")[1];
 			String[] szQueryWords = sPhrase.split(" ");
-			System.out.println("DEBUG phrase length: " + szQueryWords.length + szQueryWords[0] + szQueryWords[1]);
+			//System.out.println("DEBUG phrase length: " + szQueryWords.length + szQueryWords[0] + szQueryWords[1]);
 			bPhraseFlag = true;
 			if (sScope.equals("title"))
             {

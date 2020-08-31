@@ -1,2 +1,3 @@
 http://www.baidu.com
 http://www.google.com/*
+https://www.facebook.com/*

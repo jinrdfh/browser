@@ -2561,3 +2561,30 @@ This warning can be switched off on the Team > Git > Confirmations and Warnings 
 
 !ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-08-31 09:16:12.093
 !MESSAGE executing callback sts4.classpath.eCKHuHai SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-08-31 14:33:51.015
+!MESSAGE exists = false open = true => deleted = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-08-31 14:33:51.016
+!MESSAGE buffering callback sts4.classpath.eCKHuHai demo true 0
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-08-31 14:33:51.017
+!MESSAGE executing callback sts4.classpath.eCKHuHai 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-08-31 14:33:51.040
+!MESSAGE executing callback sts4.classpath.eCKHuHai SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-08-31 14:33:52.395
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-08-31 14:33:52.401
+!MESSAGE classpath=64 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-08-31 14:33:52.405
+!MESSAGE buffering callback sts4.classpath.eCKHuHai demo false 64
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-08-31 14:33:52.406
+!MESSAGE executing callback sts4.classpath.eCKHuHai 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-08-31 14:33:52.411
+!MESSAGE executing callback sts4.classpath.eCKHuHai SUCCESS [done]
