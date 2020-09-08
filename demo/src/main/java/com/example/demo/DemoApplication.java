@@ -87,8 +87,8 @@ public class DemoApplication {
 			String sCurKey = null;
 			int iCurUrlId = -1;
 			KeyInfo oCurKey = new KeyInfo();
-			HashMap<String, List<Integer> > mpCurPage = new HashMap<String, List<Integer> >();
-			List<Integer> lstPos = new ArrayList<Integer>();
+			HashMap<String, ArrayList<Integer> > mpCurPage = new HashMap<String, ArrayList<Integer> >();
+			ArrayList<Integer> lstPos = new ArrayList<Integer>();
 			while ((tempString = reader.readLine()) != null) {
 				String[] words = tempString.split(",");
                 //System.out.println("DEBUG line: " + words[0]);
@@ -118,7 +118,7 @@ public class DemoApplication {
                         oCurKey.m_keyPos.put(iCurUrlId, mpCurPage);
                     }
                     iCurUrlId = Integer.valueOf(words[1]);
-                    mpCurPage = new HashMap<String, List<Integer> >();
+                    mpCurPage = new HashMap<String, ArrayList<Integer> >();
                 }
                 else if (words[0].equals("t"))
                 {
@@ -184,16 +184,16 @@ public class DemoApplication {
 		}
 		return true;
 	}
-    List<Integer> searchTitle(String sQueryWord) {
+    ArrayList<Integer> searchPos(String sQueryWord, String sType) {
         ArrayList<Integer> lstUrlId = new ArrayList<Integer>();
         KeyInfo oKeyNode = m_keysRecord.get(sQueryWord);
         if (null != oKeyNode)
         {
-            for(Map.Entry<Integer, HashMap<String, List<Integer> > > entryPage : oKeyNode.m_keyPos.entrySet()){
+            for(Map.Entry<Integer, HashMap<String, ArrayList<Integer> > > entryPage : oKeyNode.m_keyPos.entrySet()){
                 int iUrlId = entryPage.getKey();
-                HashMap<String, List<Integer> > mpPageInfo = entryPage.getValue();
-                List<Integer> lstPos = mpPageInfo.get("t");
-                if (null != lstPos)
+                HashMap<String, ArrayList<Integer> > mpPageInfo = entryPage.getValue();
+                List<Integer> lstPos = mpPageInfo.get(sType);
+                if ((null != lstPos) && (0 < lstPos.size()))
                 {
                     lstUrlId.add(iUrlId);
                 }
@@ -201,13 +201,23 @@ public class DemoApplication {
         }
         return lstUrlId;
     }
-    List<Integer> searchTitle(String[] sQueryWords) {
+    ArrayList<Integer> searchPos(String sQueryWord, Integer iUrlId, String sType) {
+        ArrayList<Integer> lstPos = new ArrayList<Integer>();
+        KeyInfo oKeyNode = m_keysRecord.get(sQueryWord);
+        if (null != oKeyNode)
+        {
+            HashMap<String, ArrayList<Integer> > mpPageInfo = oKeyNode.m_keyPos.get(iUrlId);
+            lstPos = mpPageInfo.get(sType);
+        }
+        return lstPos;
+    }
+    ArrayList<Integer> searchPos(String[] sQueryWords, String sType) {
         ArrayList<Integer> lstUrlId = new ArrayList<Integer>();
         /* id cnt */
         HashMap<Integer, Integer> mpCnt = new HashMap<Integer, Integer>();
         for (int i = 0; i < sQueryWords.length; ++i)
         {
-            List<Integer> lstTpUrls = searchTitle(sQueryWords[i]);
+            ArrayList<Integer> lstTpUrls = searchPos(sQueryWords[i], sType);
             System.out.println("DEBUT word: " + sQueryWords[i] + " size: " + lstTpUrls.size());
             for (Integer iUrlId : lstTpUrls)
             {
@@ -223,180 +233,99 @@ public class DemoApplication {
                 }
             }
         }
+        ArrayList<Integer> lstAllUrlId = new ArrayList<Integer>();
         for(Map.Entry<Integer, Integer> entryCnt : mpCnt.entrySet()){
             int iUrlId = entryCnt.getKey();
             int iCnt = entryCnt.getValue();
             System.out.println("DEBUT URLId: " + iUrlId + " cnt: " + iCnt);
             if (iCnt == sQueryWords.length)
             {
-                lstUrlId.add(iUrlId);
+                lstAllUrlId.add(iUrlId);
+            }
+        }
+        /* filter */
+        for(Integer iTpUrlId : lstAllUrlId)
+        {
+            ArrayList<ArrayList<Integer> > lstlstPos = new ArrayList<ArrayList<Integer> >();
+            int iMaxPos = 0;
+            for (int i = 0; i < sQueryWords.length; ++i)
+            {
+                ArrayList<Integer> lstPos = searchPos(sQueryWords[i], iTpUrlId, sType);
+                int iCurMax = Collections.max(lstPos);
+                if (iCurMax > iMaxPos)
+                {
+                    iMaxPos = iCurMax;
+                }
+                lstlstPos.add(lstPos);
+            }
+            boolean res = cmpPos(lstlstPos, sQueryWords.length, iMaxPos, sQueryWords);
+            if (res)
+            {
+                lstUrlId.add(iTpUrlId);
             }
         }
         return lstUrlId;
     }
-    List<Integer> searchText(String sQueryWord) {
-        ArrayList<Integer> lstUrlId = new ArrayList<Integer>();
+    String getMouldColor(String[] sQueryWords)
+    {
+        HashMap<String, Integer> mpColorMap = new HashMap<String, Integer>();
+        char[] szcMould = new char[sQueryWords.length];
+        for (int i = 0; i < sQueryWords.length; ++i)
+        {
+            mpColorMap.put(sQueryWords[i], Integer.valueOf(String.valueOf('0')) + i + 1);
+        }
+        for (int i = 0; i < sQueryWords.length; ++i)
+        {
+            szcMould[i] = Integer.toString(mpColorMap.get(sQueryWords[i])).toCharArray()[0];
+        }
+        return new String(szcMould);
+    }
+    boolean cmpPos(ArrayList<ArrayList<Integer> > lstlstPos, int iSzLen, int iMaxPos, String[] sQueryWords)
+    {
+        char[] szPos = new char[iMaxPos + 1];
+        /* init */
+        for (int i = 0; i <= iMaxPos; ++i)
+        {
+            szPos[i] = '0';
+        }
+        /* fill */
+        for (int i = 0; i < iSzLen; ++i)
+        {
+            char cCurColor = Integer.toString(Integer.valueOf(String.valueOf('0')) + i + 1).toCharArray()[0];
+            for (Integer iCurPos : lstlstPos.get(i))
+            {
+                szPos[iCurPos] = cCurColor;
+            }
+        }
+        /* mould */
+        String sMould = getMouldColor(sQueryWords);
+        String sPos = new String(szPos);
+        if (sPos.contains(sMould))
+        {
+            System.out.println("DEBUG color: " + sPos + " mould: " + sMould);
+            return true;
+        }
+        return false;
+    }
 
-        //System.out.println("DEBUG key book size: " + m_keysRecord.size());
-        KeyInfo oKeyNode = m_keysRecord.get(sQueryWord);
-        if (null != oKeyNode)
-        {
-            for(Map.Entry<Integer, HashMap<String, List<Integer> > > entryPage : oKeyNode.m_keyPos.entrySet()){
-                int iUrlId = entryPage.getKey();
-                HashMap<String, List<Integer> > mpPageInfo = entryPage.getValue();
-                List<Integer> lstPos = mpPageInfo.get("a");
-                if (null != lstPos)
-                {
-                    lstUrlId.add(iUrlId);
-                }
-            }
-        }
-        return lstUrlId;
-    }
-    List<Integer> searchText(String[] sQueryWords) {
-        ArrayList<Integer> lstUrlId = new ArrayList<Integer>();
-        /* id cnt */
-        HashMap<Integer, Integer> mpCnt = new HashMap<Integer, Integer>();
-        for (int i = 0; i < sQueryWords.length; ++i)
-        {
-            List<Integer> lstTpUrls = searchText(sQueryWords[i]);
-            System.out.println("DEBUT word: " + sQueryWords[i] + " size: " + lstTpUrls.size());
-            for (Integer iUrlId : lstTpUrls)
-            {
-                Integer iCurCnt = mpCnt.get(iUrlId);
-                if (null == iCurCnt)
-                {
-                    mpCnt.put(iUrlId, 1);
-                }
-                else
-                {
-                    iCurCnt = iCurCnt + 1;
-                    mpCnt.put(iUrlId, iCurCnt);
-                }
-            }
-        }
-        for(Map.Entry<Integer, Integer> entryCnt : mpCnt.entrySet()){
-            int iUrlId = entryCnt.getKey();
-            int iCnt = entryCnt.getValue();
-            System.out.println("DEBUT URLId: " + iUrlId + " cnt: " + iCnt);
-            if (iCnt == sQueryWords.length)
-            {
-                lstUrlId.add(iUrlId);
-            }
-        }
-        return lstUrlId;
-    }
-    List<Integer> searchURL(String sQueryWord) {
-        ArrayList<Integer> lstUrlId = new ArrayList<Integer>();
-        KeyInfo oKeyNode = m_keysRecord.get(sQueryWord);
-        if (null != oKeyNode)
-        {
-            for(Map.Entry<Integer, HashMap<String, List<Integer> > > entryPage : oKeyNode.m_keyPos.entrySet()){
-                int iUrlId = entryPage.getKey();
-                HashMap<String, List<Integer> > mpPageInfo = entryPage.getValue();
-                List<Integer> lstPos = mpPageInfo.get("U");
-                if (null != lstPos)
-                {
-                    lstUrlId.add(iUrlId);
-                }
-            }
-        }
-        return lstUrlId;
-    }
-    List<Integer> searchURL(String[] sQueryWords) {
-        ArrayList<Integer> lstUrlId = new ArrayList<Integer>();
-        /* id cnt */
-        HashMap<Integer, Integer> mpCnt = new HashMap<Integer, Integer>();
-        for (int i = 0; i < sQueryWords.length; ++i)
-        {
-            List<Integer> lstTpUrls = searchURL(sQueryWords[i]);
-            System.out.println("DEBUT word: " + sQueryWords[i] + " size: " + lstTpUrls.size());
-            for (Integer iUrlId : lstTpUrls)
-            {
-                Integer iCurCnt = mpCnt.get(iUrlId);
-                if (null == iCurCnt)
-                {
-                    mpCnt.put(iUrlId, 1);
-                }
-                else
-                {
-                    iCurCnt = iCurCnt + 1;
-                    mpCnt.put(iUrlId, iCurCnt);
-                }
-            }
-        }
-        for(Map.Entry<Integer, Integer> entryCnt : mpCnt.entrySet()){
-            int iUrlId = entryCnt.getKey();
-            int iCnt = entryCnt.getValue();
-            System.out.println("DEBUT URLId: " + iUrlId + " cnt: " + iCnt);
-            if (iCnt == sQueryWords.length)
-            {
-                lstUrlId.add(iUrlId);
-            }
-        }
-        return lstUrlId;
-    }
-    List<Integer> searchLinks(String sQueryWord) {
-        ArrayList<Integer> lstUrlId = new ArrayList<Integer>();
-        KeyInfo oKeyNode = m_keysRecord.get(sQueryWord);
-        if (null != oKeyNode)
-        {
-            for(Map.Entry<Integer, HashMap<String, List<Integer> > > entryPage : oKeyNode.m_keyPos.entrySet()){
-                int iUrlId = entryPage.getKey();
-                HashMap<String, List<Integer> > mpPageInfo = entryPage.getValue();
-                List<Integer> lstPos = mpPageInfo.get("l");
-                if (null != lstPos)
-                {
-                    lstUrlId.add(iUrlId);
-                }
-            }
-        }
-        return lstUrlId;
-    }
-    List<Integer> searchLinks(String[] sQueryWords) {
-        ArrayList<Integer> lstUrlId = new ArrayList<Integer>();
-        /* id cnt */
-        HashMap<Integer, Integer> mpCnt = new HashMap<Integer, Integer>();
-        for (int i = 0; i < sQueryWords.length; ++i)
-        {
-            List<Integer> lstTpUrls = searchLinks(sQueryWords[i]);
-            System.out.println("DEBUT word: " + sQueryWords[i] + " size: " + lstTpUrls.size());
-            for (Integer iUrlId : lstTpUrls)
-            {
-                Integer iCurCnt = mpCnt.get(iUrlId);
-                if (null == iCurCnt)
-                {
-                    mpCnt.put(iUrlId, 1);
-                }
-                else
-                {
-                    iCurCnt = iCurCnt + 1;
-                    mpCnt.put(iUrlId, iCurCnt);
-                }
-            }
-        }
-        for(Map.Entry<Integer, Integer> entryCnt : mpCnt.entrySet()){
-            int iUrlId = entryCnt.getKey();
-            int iCnt = entryCnt.getValue();
-            System.out.println("DEBUT URLId: " + iUrlId + " cnt: " + iCnt);
-            if (iCnt == sQueryWords.length)
-            {
-                lstUrlId.add(iUrlId);
-            }
-        }
-        return lstUrlId;
-    }
     List<Integer> searchAll(String sQueryWord) {
         List<Integer> lstUrlId = new ArrayList<Integer>();
-        lstUrlId = searchText(sQueryWord);
-        List<Integer> tpUrlPosURL = searchURL(sQueryWord);
+        lstUrlId = searchPos(sQueryWord, "a");
+        List<Integer> tpUrlPosTitle = searchPos(sQueryWord, "t");
+        for (Integer iPos : tpUrlPosTitle) {
+            if (!lstUrlId.contains(iPos))
+            {
+                lstUrlId.add(iPos);
+            }
+        }
+        List<Integer> tpUrlPosURL = searchPos(sQueryWord, "U");
         for (Integer iPos : tpUrlPosURL) {
             if (!lstUrlId.contains(iPos))
             {
                 lstUrlId.add(iPos);
             }
         }
-        List<Integer> tpUrlPosLinks = searchLinks(sQueryWord);
+        List<Integer> tpUrlPosLinks = searchPos(sQueryWord, "l");
         for (Integer iPos : tpUrlPosLinks) {
             if (!lstUrlId.contains(iPos))
             {
@@ -406,38 +335,32 @@ public class DemoApplication {
         return lstUrlId;
     }
     List<Integer> searchAll(String[] sQueryWords) {
-        ArrayList<Integer> lstUrlId = new ArrayList<Integer>();
-        /* id cnt */
-        HashMap<Integer, Integer> mpCnt = new HashMap<Integer, Integer>();
-        for (int i = 0; i < sQueryWords.length; ++i)
-        {
-            List<Integer> lstTpUrls = searchAll(sQueryWords[i]);
-            System.out.println("DEBUT word: " + sQueryWords[i] + " size: " + lstTpUrls.size());
-            for (Integer iUrlId : lstTpUrls)
+        List<Integer> lstUrlId = new ArrayList<Integer>();
+        lstUrlId = searchPos(sQueryWords, "a");
+        List<Integer> tpUrlPosTitle = searchPos(sQueryWords, "t");
+        for (Integer iPos : tpUrlPosTitle) {
+            if (!lstUrlId.contains(iPos))
             {
-                Integer iCurCnt = mpCnt.get(iUrlId);
-                if (null == iCurCnt)
-                {
-                    mpCnt.put(iUrlId, 1);
-                }
-                else
-                {
-                    iCurCnt = iCurCnt + 1;
-                    mpCnt.put(iUrlId, iCurCnt);
-                }
+                lstUrlId.add(iPos);
             }
         }
-        for(Map.Entry<Integer, Integer> entryCnt : mpCnt.entrySet()){
-            int iUrlId = entryCnt.getKey();
-            int iCnt = entryCnt.getValue();
-            System.out.println("DEBUT URLId: " + iUrlId + " cnt: " + iCnt);
-            if (iCnt == sQueryWords.length)
+        List<Integer> tpUrlPosURL = searchPos(sQueryWords, "U");
+        for (Integer iPos : tpUrlPosURL) {
+            if (!lstUrlId.contains(iPos))
             {
-                lstUrlId.add(iUrlId);
+                lstUrlId.add(iPos);
+            }
+        }
+        List<Integer> tpUrlPosLinks = searchPos(sQueryWords, "l");
+        for (Integer iPos : tpUrlPosLinks) {
+            if (!lstUrlId.contains(iPos))
+            {
+                lstUrlId.add(iPos);
             }
         }
         return lstUrlId;
     }
+
 	public static void main(String[] args) {
 		DemoApplication oneDemo = new DemoApplication();
 		oneDemo.readBook(oneDemo.sUrlFileName);
@@ -485,19 +408,19 @@ public class DemoApplication {
 			if (sScope.equals("title"))
             {
                 System.out.println("DEBUG get into phrase title");
-                tpUrlPos = searchTitle(szQueryWords);
+                tpUrlPos = searchPos(szQueryWords, "t");
             }
             else if (sScope.equals("text"))
             {
-                tpUrlPos = searchText(szQueryWords);
+                tpUrlPos = searchPos(szQueryWords, "a");
             }
             else if (sScope.equals("URL"))
             {
-                tpUrlPos = searchURL(szQueryWords);
+                tpUrlPos = searchPos(szQueryWords, "U");
             }
             else if (sScope.equals("links"))
             {
-                tpUrlPos = searchLinks(szQueryWords);
+                tpUrlPos = searchPos(szQueryWords, "l");
             }
             else if (sScope.equals("all"))
             {
@@ -506,19 +429,19 @@ public class DemoApplication {
         }
         else if (sScope.equals("title"))
         {
-            tpUrlPos = searchTitle(sLowQuery);
+            tpUrlPos = searchPos(sLowQuery, "t");
         }
         else if (sScope.equals("text"))
         {
-            tpUrlPos = searchText(sLowQuery);
+            tpUrlPos = searchPos(sLowQuery, "a");
         }
         else if (sScope.equals("URL"))
         {
-            tpUrlPos = searchURL(sLowQuery);
+            tpUrlPos = searchPos(sLowQuery, "U");
         }
         else if (sScope.equals("links"))
         {
-            tpUrlPos = searchLinks(sLowQuery);
+            tpUrlPos = searchPos(sLowQuery, "l");
         }
         else if (sScope.equals("all"))
         {

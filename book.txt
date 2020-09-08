@@ -1,4 +1,87 @@
-Book,3
-0,http://www.comp.hkbu.edu.hk,Department of Computer Science, Hong Kong Baptist University
-1,http://www.comp.hkbu.edu.hk/,Department of Computer Science, Hong Kong Baptist University
-2,http://www.weibo.com/hkbucs/,tengine
+Book,86
+0,http://www.comp.hkbu.edu.hk/,Department of Computer Science, Hong Kong Baptist University
+1,http://buwww.hkbu.edu.hk/eng/main/index.jsp,
+2,http://www.comp.hkbu.edu.hk/msc/itm/cn/content.php,资讯科技管理理学硕士课程, 香港浸会大学
+3,http://www.comp.hkbu.edu.hk/msc/itm/cn/content.php/,资讯科技管理理学硕士课程, 香港浸会大学
+4,https://ar.hkbu.edu.hk/undergraduate-admissions/application-form-prospective-students,Applications and Forms (Prospective Students) | HKBU AR
+5,https://foundation.hkbu.edu.hk/en/,HKBU Foundation
+6,http://www.comp.hkbu.edu.hk/msc/ais/cn/,高级信息系统理学硕士课程, 香港浸会大学
+7,https://foundation.hkbu.edu.hk/en/ways-to-give,Ways to Give | HKBU Foundation
+8,https://ar.hkbu.edu.hk/student-services/academic-results/academic-problems,Academic Problems | HKBU AR
+9,http://www.comp.hkbu.edu.hk/msc/ais/en/,Master of Science (MSc) in Advanced Information Systems, Hong Kong Baptist University
+10,https://ar.hkbu.edu.hk/,HKBU Academic Registry
+11,https://ar.hkbu.edu.hk/student-services/course-registration/pre-registration,Course Pre-registration | HKBU AR
+12,http://www.comp.hkbu.edu.hk/v1/,Department of Computer Science, Hong Kong Baptist University
+13,http://www.comp.hkbu.edu.hk/ais/en,Master of Science (MSc) in Advanced Information Systems, Hong Kong Baptist University
+14,http://www.comp.hkbu.edu.hk/msc/ais/tc/,高級信息系統理學碩士課程, 香港浸會大學
+15,https://ar.hkbu.edu.hk/student-services/academic-results/assessment-grading-system,Assessment Grading System | HKBU AR
+16,https://ar.hkbu.edu.hk/about-ar/organization-of-the-academic-registry,Organization of the Academic Registry | HKBU AR
+17,https://ar.hkbu.edu.hk/student-services/course-registration/class-timetable,Class Timetable | HKBU AR
+18,http://www.comp.hkbu.edu.hk/msc/itm/en/content.php,Master of Science (MSc) in Information Technology Management, Hong Kong Baptist University
+19,https://gs.hkbu.edu.hk/prospective-students/why-hkbu,Why HKBU - Prospective Students - Hong Kong Baptist University - Graduate School
+20,https://ar.hkbu.edu.hk/student-services/course-registration/course-add-drop,Course Add/Drop | HKBU AR
+21,http://sa.hkbu.edu.hk/fye,302 Found
+22,http://www.hkbu.edu.hk/eng/visitors/visitors.jsp,Visitors – HKBU
+23,https://sles.hkbu.edu.hk/,HKBU - SLES
+24,https://ar.hkbu.edu.hk/about-ar,About AR | HKBU AR
+25,http://www.comp.hkbu.edu.hk/ais/cn,高级信息系统理学硕士课程, 香港浸会大学
+26,https://ar.hkbu.edu.hk/about-ar/organization-of-the-academic-registry/academic-affairs-section,Academic Affairs Section | HKBU AR
+27,https://admissions.hkbu.edu.hk/en/,Undergraduate Admissions | Hong Kong Baptist University
+28,http://www.comp.hkbu.edu.hk/outreach/,HKBU COMP International Exchange and Internship Programmes
+29,http://www.comp.hkbu.edu.hk/ais/tc,高級信息系統理學碩士課程, 香港浸會大學
+30,https://www.hkbu.edu.hk/,Hong Kong Baptist University - HKBU
+31,https://gs.hkbu.edu.hk/prospective-students,Prospective Students - Hong Kong Baptist University - Graduate School
+32,https://ar.hkbu.edu.hk/about-ar/organization-of-the-academic-registry/academic-quality-support-section,Academic Quality Support Section | HKBU AR
+33,http://www.comp.hkbu.edu.hk/msc/itm/en,Master of Science (MSc) in Information Technology Management, Hong Kong Baptist University
+34,http://www.comp.hkbu.edu.hk/v1/general/video_html/intro_eng.php,Video
+35,https://sles.hkbu.edu.hk/access_right,HKBU - SSOid Sign In
+36,https://ar.hkbu.edu.hk/about-ar/organization-of-the-academic-registry/admissions-office,Admissions Office | HKBU AR
+37,http://go.hkbu.edu.hk,HKBU Prospective Student Life
+38,https://ar.hkbu.edu.hk/student-services/course-registration,Course Registration | HKBU AR
+39,http://studentlife.hkbu.edu.hk/,HKBU Current Student Life
+40,http://www.hkbu.edu.hk/eng/staff/staff.jsp,Staff – HKBU
+41,https://ar.hkbu.edu.hk/student-services/academic-results/academic-honours,Academic Honours | HKBU AR
+42,https://sles.hkbu.edu.hk/access_right/,HKBU - SSOid Sign In
+43,http://buwww.hkbu.edu.hk/sch/main/index.jsp,
+44,https://ar.hkbu.edu.hk/student-services/academic-results/appeal-procedures,Appeal Procedures | HKBU AR
+45,https://ar.hkbu.edu.hk/student-services/academic-results/dismissal,Dismissal | HKBU AR
+46,https://sa.hkbu.edu.hk/,Hong Kong Baptist University Office of Student Affairs
+47,http://www.comp.hkbu.edu.hk,Department of Computer Science, Hong Kong Baptist University
+48,http://pers.hkbu.edu.hk/job/job_details.php,Hong Kong Baptist University - Personnel Office
+49,http://www.comp.hkbu.edu.hk/msc/,Postgraduate Study @ Computer Science, Hong Kong Baptist University
+50,http://www.comp.hkbu.edu.hk/msc/itm/en/,Master of Science (MSc) in Information Technology Management, Hong Kong Baptist University
+51,https://sa.hkbu.edu.hk/fye,First Year Experience - Office of Student Affairs, Hong Kong Baptist University
+52,http://www.comp.hkbu.edu.hk/msc/itm/tc,資訊科技管理理學碩士課程, 香港浸會大學
+53,http://pers.hkbu.edu.hk/job,Hong Kong Baptist University - Personnel Office
+54,https://ar.hkbu.edu.hk/student-services/academic-results,Academic Results | HKBU AR
+55,https://ar.hkbu.edu.hk/student-services/course-registration/course-withdrawal,Course Withdrawal | HKBU AR
+56,https://ar.hkbu.edu.hk/about-ar/contact-us,Contact Us | HKBU AR
+57,http://www.comp.hkbu.edu.hk/ais/,Master of Science (MSc) in Advanced Information Systems 高級信息系統理學碩士課程
+58,http://ar.hkbu.edu.hk/,301 Moved Permanently
+59,http://www.comp.hkbu.edu.hk/msc/itm/,Master of Science (MSc) in Information Technology Technology 資訊科技管理理學碩士課程
+60,http://go.hkbu.edu.hk/,HKBU Prospective Student Life
+61,http://www.hkbu.edu.hk/eng/department/department.jsp,Faculties, Schools and Academic Departments – HKBU
+62,https://gs.hkbu.edu.hk/about/contact-us/,Contact Us - About - Hong Kong Baptist University - Graduate School
+63,http://www.hkbu.edu.hk/eng/about/privacy.jsp,Privacy Policy - HKBU
+64,http://pers.hkbu.edu.hk/job/job_details.php/index.php,Hong Kong Baptist University - Personnel Office
+65,http://www.comp.hkbu.edu.hk/msc/itm/cn/,资讯科技管理理学硕士课程, 香港浸会大学
+66,http://www.comp.hkbu.edu.hk/msc/itm/tc/,資訊科技管理理學碩士課程, 香港浸會大學
+67,http://www.hkbu.edu.hk/eng/main/index.jsp,Hong Kong Baptist University – HKBU
+68,http://www.comp.hkbu.edu.hk/ais/tc/,高級信息系統理學碩士課程, 香港浸會大學
+69,http://www.comp.hkbu.edu.hk/ais/cn/,高级信息系统理学硕士课程, 香港浸会大学
+70,http://www.comp.hkbu.edu.hk/ais/en/content.php,Master of Science (MSc) in Advanced Information Systems, Hong Kong Baptist University
+71,https://admissions.hkbu.edu.hk/../,Error / 未能提供網頁
+72,https://gs.hkbu.edu.hk/prospective-students/,Prospective Students - Hong Kong Baptist University - Graduate School
+73,http://www.comp.hkbu.edu.hk/ais/cn/content.php,高级信息系统理学硕士课程, 香港浸会大学
+74,http://www.hkbu.edu.hk/eng/media/media1.jsp,Media – HKBU
+75,https://admissions.hkbu.edu.hk/,Undergraduate Admissions | Hong Kong Baptist University
+76,http://www.hkbu.edu.hk,Hong Kong Baptist University - HKBU
+77,https://gs.hkbu.edu.hk/,Hong Kong Baptist University - Graduate School
+78,http://gs.hkbu.edu.hk/,302 Found
+79,https://gs.hkbu.edu.hk/about/contact-us,Contact Us - About - Hong Kong Baptist University - Graduate School
+80,http://www.comp.hkbu.edu.hk/ais/en/,Master of Science (MSc) in Advanced Information Systems, Hong Kong Baptist University
+81,https://iss.hkbu.edu.hk/amsappl_pg/,Online Application System for Admission to Postgraduate Studies
+82,https://ar.hkbu.edu.hk/about-ar/organization-of-the-academic-registry/undergraduate-studies-section,Undergraduate Studies Section | HKBU AR
+83,https://ar.hkbu.edu.hk/student-services,Student Services
+84,http://www.hkbu.edu.hk/,Hong Kong Baptist University - HKBU
+85,https://ito.hkbu.edu.hk/hkbu-mobile/,HKBU Mobile
